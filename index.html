@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MMH. TONOY | Cosmic & Solar System Realm</title>
+    <meta name="referrer" content="no-referrer">
+    <title>MMH. TONOY | Cosmic Explorer</title>
     
-    <!-- Modern & Sleek Sci-Fi Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
@@ -16,7 +16,8 @@
             --neon-cyan: #38bdf8;
             --neon-purple: #c084fc;
             --neon-gold: #fbbf24;
-            --glass-bg: rgba(10, 15, 30, 0.8);
+            --glass-bg: rgba(10, 15, 30, 0.92);
+            --glass-card: rgba(18, 26, 47, 0.8);
             --border-glow: rgba(56, 189, 248, 0.35);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
@@ -32,6 +33,9 @@
             background-color: var(--bg-deep);
             color: var(--text-main);
             font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
             overflow-x: hidden;
             line-height: 1.6;
         }
@@ -46,39 +50,15 @@
             pointer-events: none;
         }
 
-        /* Ambient Glows */
-        .ambient-nebula-1 {
-            position: fixed;
-            top: -10%;
-            left: -10%;
-            width: 50vw;
-            height: 50vw;
-            background: radial-gradient(circle, rgba(192, 132, 252, 0.15) 0%, transparent 70%);
-            z-index: -2;
-            pointer-events: none;
-        }
-
-        .ambient-nebula-2 {
-            position: fixed;
-            bottom: -10%;
-            right: -10%;
-            width: 50vw;
-            height: 50vw;
-            background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
-            z-index: -2;
-            pointer-events: none;
-        }
-
-        /* Header Navigation */
         header {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 18px 8%;
+            padding: 16px 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(2, 4, 10, 0.88);
+            background: rgba(2, 4, 10, 0.95);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             z-index: 100;
@@ -86,63 +66,72 @@
 
         .logo {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--neon-cyan);
-            letter-spacing: 1px;
+            cursor: pointer;
         }
 
-        .logo span {
-            color: var(--neon-purple);
-        }
+        .logo span { color: var(--neon-purple); }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 12px;
         }
 
-        nav a {
+        nav button {
+            background: transparent;
+            border: none;
             color: var(--text-main);
-            text-decoration: none;
             font-family: 'Exo 2', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 8px;
             transition: all 0.3s ease;
         }
 
-        nav a:hover {
+        nav button:hover, nav button.active {
             color: var(--neon-cyan);
-            text-shadow: 0 0 10px var(--neon-cyan);
+            background: rgba(56, 189, 248, 0.15);
         }
 
-        /* Hero Section (Facebook Cover Ratio) */
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 110px 20px 40px 20px;
-        }
-
-        .hero-fb-cover-box {
-            position: relative;
+        main {
+            flex: 1;
+            margin-top: 85px;
+            padding: 30px 20px;
+            max-width: 1200px;
             width: 100%;
-            max-width: 900px;
-            min-height: 380px;
-            padding: 45px;
-            border-radius: 20px;
-            background: 
-                linear-gradient(180deg, rgba(2, 4, 10, 0.5) 0%, rgba(2, 4, 10, 0.88) 100%),
-                url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200') center/cover no-repeat;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-view {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+
+        .page-view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-box {
+            background: var(--glass-bg);
             border: 1px solid var(--border-glow);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(56, 189, 248, 0.2);
-            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            padding: 40px 25px;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            max-width: 850px;
+            margin: 10px auto 30px auto;
         }
 
         .hero-tag {
@@ -152,13 +141,12 @@
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
-        .hero h1 {
+        .hero-box h1 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 3rem;
-            font-weight: 700;
+            font-size: 2.5rem;
             margin-bottom: 15px;
             background: linear-gradient(135deg, #ffffff 0%, #38bdf8 50%, #c084fc 100%);
             -webkit-background-clip: text;
@@ -166,433 +154,711 @@
         }
 
         .hero-bio {
-            font-size: 1.05rem;
-            color: #cbd5e1;
-            margin-bottom: 25px;
-            max-width: 750px;
-        }
-
-        .sci-btn {
-            display: inline-block;
-            padding: 12px 32px;
-            font-family: 'Exo 2', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #ffffff;
-            background: linear-gradient(135deg, #0284c7 0%, #9333ea 100%);
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .sci-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.5);
-        }
-
-        /* Common Container */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-
-        .section-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.2rem;
-            color: #ffffff;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .section-title span { color: var(--neon-cyan); }
-        .section-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, var(--neon-purple), transparent);
-        }
-
-        /* Milky Way Section */
-        .milkyway-card {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            background: var(--glass-bg);
-            border: 1px solid rgba(192, 132, 252, 0.25);
-            border-radius: 20px;
-            padding: 30px;
-            align-items: center;
-            backdrop-filter: blur(12px);
-        }
-
-        .milkyway-img {
-            width: 100%;
-            height: 320px;
-            object-fit: cover;
-            border-radius: 15px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-        }
-
-        .milkyway-info h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.8rem;
-            color: var(--neon-purple);
-            margin-bottom: 15px;
-        }
-
-        .milkyway-info p {
             color: var(--text-muted);
             font-size: 1rem;
-            margin-bottom: 15px;
-        }
-
-        /* Solar System Interactive Section */
-        .planet-selector {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding-bottom: 15px;
             margin-bottom: 30px;
-            scrollbar-width: thin;
-            scrollbar-color: var(--neon-cyan) var(--bg-deep);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .planet-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: var(--text-main);
-            padding: 10px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-family: 'Exo 2', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            white-space: nowrap;
-            transition: all 0.3s ease;
-        }
-
-        .planet-btn:hover, .planet-btn.active {
-            background: var(--neon-cyan);
-            color: #000;
-            box-shadow: 0 0 15px var(--neon-cyan);
-            border-color: var(--neon-cyan);
-        }
-
-        /* Planet Display Display Box */
-        .planet-display-card {
+        .category-grid {
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 35px;
-            background: var(--glass-bg);
-            border: 1px solid var(--border-glow);
-            border-radius: 20px;
-            padding: 35px;
-            align-items: center;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
 
-        .planet-img-wrapper {
+        .cat-card {
+            background: var(--glass-card);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 25px 20px;
+            cursor: pointer;
+            transition: all 0.35s ease;
             text-align: center;
         }
 
-        .planet-img-wrapper img {
-            width: 100%;
-            max-width: 320px;
-            height: 320px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 25px rgba(56, 189, 248, 0.3));
-            transition: transform 0.5s ease;
+        .cat-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.25);
+            background: rgba(255, 255, 255, 0.08);
         }
 
-        .planet-details h3 {
+        .cat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .cat-card h3 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.2rem;
-            color: var(--neon-cyan);
-            margin-bottom: 5px;
+            font-size: 1.3rem;
+            color: var(--text-main);
+            margin-bottom: 8px;
         }
 
-        .planet-subtitle {
+        .cat-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .section-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .section-header h2 span { color: var(--neon-cyan); }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-main);
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
             font-family: 'Exo 2', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--neon-cyan);
+            color: #000;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 22px;
+        }
+
+        .item-card {
+            background: var(--glass-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 18px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.35s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .item-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--neon-purple);
+            box-shadow: 0 12px 30px rgba(192, 132, 252, 0.25);
+        }
+
+        .img-container {
+            width: 100%;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 14px;
+            background: #080c18;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .item-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .item-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .item-card h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .item-card span {
+            font-size: 0.85rem;
             color: var(--neon-gold);
-            font-size: 1rem;
-            margin-bottom: 15px;
+            font-family: 'Exo 2', sans-serif;
+        }
+
+        /* Detail Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(2, 4, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 200;
+            display: none;
+            overflow-y: auto;
+            padding: 30px 15px;
+        }
+
+        .modal-overlay.active {
+            display: block;
+        }
+
+        .modal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 24px;
+            padding: 30px 20px;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--text-main);
+            font-size: 1.3rem;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        .modal-hero {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 25px;
+            margin-bottom: 30px;
+            align-items: center;
+        }
+
+        .modal-main-img-wrap {
+            position: relative;
+            cursor: pointer;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: #000;
+        }
+
+        .modal-main-img-wrap::after {
+            content: '🔍 Click to Fullscreen';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 6px;
+            background: rgba(0, 0, 0, 0.75);
+            color: var(--neon-cyan);
+            font-size: 0.75rem;
+            text-align: center;
             font-weight: 600;
         }
 
-        .planet-desc {
-            color: var(--text-muted);
-            font-size: 1.02rem;
-            margin-bottom: 20px;
+        .modal-main-img {
+            width: 100%;
+            height: 260px;
+            object-fit: contain;
+            display: block;
+            background: #000;
         }
 
-        .planet-stats {
+        .modal-info h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            color: var(--neon-cyan);
+            margin-bottom: 4px;
+        }
+
+        .modal-type {
+            color: var(--neon-gold);
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+        }
+
+        .modal-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+        }
+
+        .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .stat-item {
+        .stat-box {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 10px 15px;
+            padding: 8px 12px;
             border-radius: 10px;
         }
 
         .stat-label {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             text-transform: uppercase;
         }
 
         .stat-value {
-            font-size: 0.95rem;
-            color: #ffffff;
+            font-size: 0.9rem;
+            color: #fff;
             font-weight: 600;
         }
 
-        /* Footer */
-        footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 30px 20px;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            background: #020308;
+        .gallery-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--neon-purple);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
         }
 
-        @media (max-width: 850px) {
-            .milkyway-card, .planet-display-card { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2.2rem; }
-            nav { display: none; }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 12px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            height: 100px;
+            background: #000;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* FULLSCREEN LIGHTBOX SYSTEM */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-img {
+            max-width: 92vw;
+            max-height: 82vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 0 35px rgba(56, 189, 248, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .lightbox-caption {
+            margin-top: 15px;
+            color: var(--text-main);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #fff;
+            font-size: 1.8rem;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            background: #ef4444;
+        }
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            background: #020308;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            .modal-hero { grid-template-columns: 1fr; }
+            .hero-box h1 { font-size: 2rem; }
+            .modal-main-img { height: 210px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="ambient-nebula-1"></div>
-    <div class="ambient-nebula-2"></div>
     <canvas id="space-canvas"></canvas>
 
-    <!-- Header Navigation -->
     <header>
-        <div class="logo">MMH.<span>TONOY</span></div>
+        <div class="logo" onclick="switchView('home')">MMH.<span>TONOY</span></div>
         <nav>
             <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#milkyway">Milky Way</a></li>
-                <li><a href="#solarsystem">Solar System</a></li>
+                <li><button id="nav-home" class="active" onclick="switchView('home')">Home</button></li>
+                <li><button id="nav-solarsystem" onclick="switchView('solarsystem')">Solar System</button></li>
+                <li><button id="nav-galaxies" onclick="switchView('galaxies')">Galaxies</button></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="about">
-        <div class="hero-fb-cover-box">
-            <div class="hero-tag">🌌 WELCOME TO MY COSMIC REALM</div>
-            <h1>MMH. TONOY</h1>
-            <p class="hero-bio">
-                I am <strong>MMH. TONOY</strong> — a passionate explorer of the deep universe, solar system dynamics, and science fiction realms. Fascinated by black holes, wormholes, and futuristic space concepts, I blend cosmic aesthetics with modern web architecture to bring galactic visions to life.
-            </p>
-            <a href="#solarsystem" class="sci-btn">Explore Solar System</a>
-        </div>
-    </section>
-
-    <!-- Milky Way Galaxy Section -->
-    <section class="container" id="milkyway">
-        <h2 class="section-title">Our Home <span>Milky Way Galaxy</span></h2>
-        <div class="milkyway-card">
-            <img src="https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=800" alt="Milky Way Galaxy" class="milkyway-img">
-            <div class="milkyway-info">
-                3D Milky Way Galaxy
-                <p>
-                    The <strong>Milky Way</strong> is a barred spiral galaxy that contains our Solar System. It spans over 100,000 light-years in diameter and harbors between 100 to 400 billion stars, including our Sun.
+    <main>
+        <!-- Home View -->
+        <div id="view-home" class="page-view active">
+            <div class="hero-box">
+                <div class="hero-tag">🌌 WELCOME TO MY COSMIC REALM</div>
+                <h1>MMH. TONOY</h1>
+                <p class="hero-bio">
+                    Explore verified high-resolution cosmic images of our Solar System and Deep Space Galaxies. Click any item or image to view in full screen mode.
                 </p>
-                <p>
-                    At its supermassive core lies <em>Sagittarius A*</em>, a massive black hole holding together our galactic neighborhood in an intricate spiral dance.
-                </p>
-            </div>
-        </div>
-    </section>
 
-    <!-- Interactive Solar System Explorer -->
-    <section class="container" id="solarsystem">
-        <h2 class="section-title">Solar System <span>Interactive Explorer</span></h2>
-        
-        <!-- Planet Navigation Selector -->
-        <div class="planet-selector">
-            <button class="planet-btn active" onclick="showPlanet('sun')">☀️ Sun (সূর্য)</button>
-            <button class="planet-btn" onclick="showPlanet('mercury')">☿ Mercury (বুধ)</button>
-            <button class="planet-btn" onclick="showPlanet('venus')">♀ Venus (শুক্র)</button>
-            <button class="planet-btn" onclick="showPlanet('earth')">♁ Earth (পৃথিবী)</button>
-            <button class="planet-btn" onclick="showPlanet('mars')">♂ Mars (মঙ্গল)</button>
-            <button class="planet-btn" onclick="showPlanet('jupiter')">♃ Jupiter (বৃহস্পতি)</button>
-            <button class="planet-btn" onclick="showPlanet('saturn')">♄ Saturn (শনি)</button>
-            <button class="planet-btn" onclick="showPlanet('uranus')">♅ Uranus (ইউরেনাস)</button>
-            <button class="planet-btn" onclick="showPlanet('neptune')">♆ Neptune (নেপচুন)</button>
-        </div>
-
-        <!-- Dynamic Planet Information Card -->
-        <div class="planet-display-card" id="planet-card">
-            <div class="planet-img-wrapper">
-                <img id="planet-img" src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?q=80&w=600" alt="Sun">
-            </div>
-            <div class="planet-details">
-                <h3 id="planet-title">Sun (সূর্য)</h3>
-                <div class="planet-subtitle" id="planet-type">Yellow Dwarf Star • Central Body</div>
-                <p class="planet-desc" id="planet-desc">
-                    The Sun is the star at the center of our Solar System. It contains 99.86% of all mass in the Solar System, radiating heat and energy that sustains life on Earth.
-                </p>
-                <div class="planet-stats">
-                    <div class="stat-item">
-                        <div class="stat-label">Diameter</div>
-                        <div class="stat-value" id="planet-dia">1,392,700 km</div>
+                <div class="category-grid">
+                    <div class="cat-card" onclick="switchView('solarsystem')">
+                        <div class="cat-icon">☀️</div>
+                        <h3>Solar System</h3>
+                        <p>Explore the Sun, Earth, Mars, Jupiter, Saturn, and all 8 planets with real photos.</p>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Surface Temp</div>
-                        <div class="stat-value" id="planet-temp">5,500 °C</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Moons</div>
-                        <div class="stat-value" id="planet-moons">0</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Orbit Period</div>
-                        <div class="stat-value" id="planet-orbit">230M Light Yrs</div>
+                    <div class="cat-card" onclick="switchView('galaxies')">
+                        <div class="cat-icon">🌌</div>
+                        <h3>Explore Galaxies</h3>
+                        <p>Discover deep space spiral galaxies like the Milky Way and Andromeda.</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Footer -->
+        <!-- Solar System View -->
+        <div id="view-solarsystem" class="page-view">
+            <div class="section-header">
+                <h2>Solar System <span>Realms</span></h2>
+                <button class="back-btn" onclick="switchView('home')">← Back to Home</button>
+            </div>
+            <div class="items-grid" id="solarsystem-grid"></div>
+        </div>
+
+        <!-- Galaxies View -->
+        <div id="view-galaxies" class="page-view">
+            <div class="section-header">
+                <h2>Deep Space <span>Galaxies</span></h2>
+                <button class="back-btn" onclick="switchView('home')">← Back to Home</button>
+            </div>
+            <div class="items-grid" id="galaxies-grid"></div>
+        </div>
+    </main>
+
+    <!-- Detail View Modal -->
+    <div class="modal-overlay" id="detail-modal">
+        <div class="modal-container">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            
+            <div class="modal-hero">
+                <div class="modal-main-img-wrap" onclick="openLightbox(document.getElementById('modal-img').src, document.getElementById('modal-title').innerText)">
+                    <img id="modal-img" class="modal-main-img" src="" alt="Detail Image">
+                </div>
+                <div class="modal-info">
+                    <h3 id="modal-title"></h3>
+                    <div id="modal-type" class="modal-type"></div>
+                    <p id="modal-desc" class="modal-desc"></p>
+                    
+                    <div id="modal-stats" class="stats-grid"></div>
+                </div>
+            </div>
+
+            <div class="gallery-title">📷 Photo Gallery (Click photo for Full Screen)</div>
+            <div id="modal-gallery" class="gallery-grid"></div>
+        </div>
+    </div>
+
+    <!-- FULLSCREEN LIGHTBOX VIEW -->
+    <div class="lightbox-overlay" id="lightbox-modal" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+        <img id="lightbox-img" class="lightbox-img" src="" alt="Fullscreen View" onclick="event.stopPropagation()">
+        <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
+
     <footer>
-        <p>MMH. TONOY &copy; 2026 | Transmitting from Milky Way Galaxy</p>
+        <p>MMH. TONOY &copy; 2026 | Cosmic Explorer Realm</p>
     </footer>
 
-    <!-- Interactive Planets Data & Canvas Stars Script -->
     <script>
-        // Interactive Planet Data Bank
-        const planetsData = {
-            sun: {
-                title: "Sun (সূর্য)",
-                type: "Yellow Dwarf Star • Center of Solar System",
-                desc: "সূর্য আমাদের সৌরজগতের কেন্দ্রস্থলে অবস্থিত নক্ষত্র। সৌরজগতের মোট ভরের ৯৯.৮৬% ধারণ করে এই সূর্য, যা গ্রহগুলোকে নিজ কক্ষপথে ধরে রাখে।",
-                img: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?q=80&w=600",
-                dia: "1,392,700 km",
-                temp: "5,500 °C",
-                moons: "0",
-                orbit: "Center"
-            },
-            mercury: {
-                title: "Mercury (বুধ)",
-                type: "Terrestrial Planet • 1st Planet",
-                desc: "বুধ সৌরজগতের ক্ষুদ্রতম এবং সূর্যের নিকটতম গ্রহ। এর কোনো বায়ুমণ্ডল না থাকায় দিনের বেলা চরম গরম এবং রাতে চরম ঠান্ডা থাকে।",
-                img: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?q=80&w=600",
-                dia: "4,879 km",
-                temp: "430 °C to -180 °C",
-                moons: "0",
-                orbit: "88 Days"
-            },
-            venus: {
-                title: "Venus (শুক্র)",
-                type: "Terrestrial Planet • 2nd Planet",
-                desc: "শুক্র সৌরজগতের সবচেয়ে উষ্ণ গ্রহ। এর ঘন কার্বন ডাই অক্সাইডের বায়ুমণ্ডল গ্রিনহাউস প্রতিক্রিয়ার মাধ্যমে প্রচুর তাপ ধরে রাখে।",
-                img: "https://images.unsplash.com/photo-1614313913007-2b4ae8ce32d6?q=80&w=600",
-                dia: "12,104 km",
-                temp: "465 °C",
-                moons: "0",
-                orbit: "225 Days"
-            },
-            earth: {
-                title: "Earth (পৃথিবী)",
-                type: "Terrestrial Planet • 3rd Planet (Our Home)",
-                desc: "আমাদের মাতৃভূমি পৃথিবী সৌরজগতের একমাত্র গ্রহ যেখানে তরল পানি ও প্রাণ সঞ্চারের উপযোগী পরিবেশ বিদ্যমান।",
-                img: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?q=80&w=600",
-                dia: "12,742 km",
-                temp: "15 °C (Avg)",
-                moons: "1 (Moon)",
-                orbit: "365.25 Days"
-            },
-            mars: {
-                title: "Mars (মঙ্গল)",
-                type: "Terrestrial Planet • 4th Planet (Red Planet)",
-                desc: "মঙ্গলকে লাল গ্রহ বলা হয় কারণ এর পৃষ্ঠভাগে আয়রন অক্সাইড (মরিচা) রয়েছে। এটি ভবিষ্যতে মানুষের বসবাসের প্রধান লক্ষ্যস্থল।",
-                img: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?q=80&w=600",
-                dia: "6,779 km",
-                temp: "-60 °C",
-                moons: "2 (Phobos, Deimos)",
-                orbit: "687 Days"
-            },
-            jupiter: {
-                title: "Jupiter (বৃহস্পতি)",
-                type: "Gas Giant • 5th Planet (Largest)",
-                desc: "বৃহস্পতি সৌরজগতের সর্ববৃহৎ গ্রহ। এর বিখ্যাত Great Red Spot হলো একটি বিশাল ঝড় যা শত শত বছর ধরে জ্বলছে।",
-                img: "https://images.unsplash.com/photo-1614732414444-096e5f1122d5?q=80&w=600",
-                dia: "139,820 km",
-                temp: "-110 °C",
-                moons: "95 Known",
-                orbit: "12 Years"
-            },
-            saturn: {
-                title: "Saturn (শনি)",
-                type: "Gas Giant • 6th Planet (Ringed Planet)",
-                desc: "শনি গ্রহ এর চমৎকার ও সুবিশাল বরফ ও শিলার রিং বা বলয়ের জন্য মহাবিশ্বে সবচেয়ে আকর্ষণীয় গ্রহ হিসেবে পরিচিত।",
-                img: "https://images.unsplash.com/photo-1614732414444-096e5f1122d5?q=80&w=600",
-                dia: "116,460 km",
-                temp: "-140 °C",
-                moons: "146 Known",
-                orbit: "29.5 Years"
-            },
-            uranus: {
-                title: "Uranus (ইউরেনাস)",
-                type: "Ice Giant • 7th Planet",
-                desc: "ইউরেনাস একটি বরফ দানব গ্রহ। এটি তার অক্ষের সাথে প্রায় ৯০ ডিগ্রি হেলে ঘুরে, যার ফলে এটি কাত হয়ে সূর্যকে প্রদক্ষিণ করে।",
-                img: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?q=80&w=600",
-                dia: "50,724 km",
-                temp: "-195 °C",
-                moons: "28 Known",
-                orbit: "84 Years"
-            },
-            neptune: {
-                title: "Neptune (নেপচুন)",
-                type: "Ice Giant • 8th Planet (Farthest)",
-                desc: "নেপচুন সৌরজগতের সবচেয়ে দূরের গ্রহ। হালকা নীল রঙের এই গ্রহটিতে পুরো সৌরজগতের সবচেয়ে দ্রুতগতির বাতাস প্রবাহিত হয়।",
-                img: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?q=80&w=600",
-                dia: "49,244 km",
-                temp: "-200 °C",
-                moons: "16 Known",
-                orbit: "165 Years"
-            }
+        // Official High-Res Astronomical Direct Wikimedia Commons Database
+        const cosmicData = {
+            solarsystem: [
+                {
+                    id: "sun",
+                    title: "Sun (সূর্য)",
+                    type: "Yellow Dwarf Star • Central Body",
+                    desc: "সূর্য আমাদের সৌরজগতের কেন্দ্রস্থলে অবস্থিত নক্ষত্র। এর পৃষ্ঠতলের তাপমাত্রা প্রায় ৫,৫০০ ডিগ্রি সেলসিয়াস।",
+                    cover: "https://upload.wikimedia.org/wikipedia/commons/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg",
+                    stats: { "Diameter": "1,392,700 km", "Surface Temp": "5,500 °C", "Age": "4.6 Billion Yrs", "Type": "Star" },
+                    gallery: [
+                        "https://upload.wikimedia.org/wikipedia/commons/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg",
+                        "https://upload.wikimedia.org/wikipedia/commons/a/a4/Solar_flare_on_Sun_August_31_2012.jpg"
+                    ]
+                },
+                {
+                    id: "mercury",
+                    title: "Mercury (বুধ)",
+                    type: "Terrestrial Planet • 1st Planet",
+                    desc: "বুধ সৌরজগতের ক্ষুদ্রতম এবং সূর্যের নিকটতম গ্রহ। এর পৃষ্ঠভাগ চাঁদের মতো অসংখ্য গর্তে ভরা।",
+                    cover: "https://upload.wikimedia.org/wikipedia/commons/d/d9/Mercury_in_color_-_c1666119400_subspace.png",
+                    stats: { "Diameter": "4,879 km", "Temp": "-180°C to 430°C", "Moons": "0", "Orbit": "88 Days" },
+                    gallery: [
+                        "https://upload.wikimedia.org/wikipedia/commons/d/d9/Mercury_in_color_-_c1666119400_subspace.png",
+                        "https://upload.wikimedia.org/wikipedia/commons/3/30/Mercury_in_false_color.org.jpg"
+                    ]
+                },
+                {
+                    id: "venus",
+                    title: "Venus (শুক্র)",
+                    type: "Terrestrial Planet • 2nd Planet",
+                    desc: "শুক্র সৌরজগতের সবচেয়ে উষ্ণ গ্রহ। এর ঘন বায়ুমণ্ডলে অ্যাসিড ও কার্বন ডাই অক্সাইড রয়েছে।",
+                    cover: "https://upload.wikimedia.org/wikipedia/commons/5/54/Venus_-_Globe.png",
+                    stats: { "Diameter": "12,104 km", "Temp": "465 °C", "Moons": "0", "Orbit": "225 Days" },
+                    gallery: [
+                        "https://upload.wikimedia.org/wikipedia/commons/5/54/Venus_-_Globe.png",
+                        "https://upload.wikimedia.org/wikipedia/commons/a/a9/Venus_in_real_color.jpg"
+                    ]
+                },
+                {
+                    id: "earth",
+                    title: "Earth (পৃথিবী)",
+                    type: "Terrestrial Planet • 3rd Planet (Home)",
+                    desc: "আমাদের নীল গ্রহ পৃথিবী—মহাবিশ্বের একমাত্র জায়গা যেখানে জানা মতে প্রাণের অস্তিত্ব রয়েছে।",
+                    cover: "https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg",
+                    stats: { "Diameter": "12,742 km", "Avg Temp": "15 °C", "Moons": "1", "Orbit": "365.25 Days" },
+                    gallery: [
+                        "https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg",
+                        "https://upload.wikimedia.org/wikipedia/commons/c/cb/The_Blue_Marble_%28remastered%29.jpg"
+                    ]
+                },
+                {
+                    id: "mars",
+                    title: "Mars (মঙ্গল)",
+                    type: "Terrestrial Planet • 4th Planet (Red Planet)",
+                    desc: "লাল গ্রহ মঙ্গল—এর মাটিতে আয়রন অক্সাইডের কারণে পুরো গ্রহটিকে লালচে দেখায়।",
+                    cover: "https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg",
+                    stats: { "Diameter": "6,779 km", "Temp": "-60 °C", "Moons": "2", "Orbit": "687 Days" },
+                    gallery: [
+                        "https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg",
+                        "https://upload.wikimedia.org/wikipedia/commons/f/f5/3D_Mars.png"
+                    ]
+                },
+                {
+                    id: "jupiter",
+                    title: "Jupiter (বৃহস্পতি)",
+                    type: "Gas Giant • 5th Planet (Largest)",
+                    desc: "সৌরজগতের সবচেয়ে বড় গ্রহ। এর বিখ্যাত Great Red Spot হলো সৌরজগতের সর্ববৃহৎ ঘূর্ণিঝড়।",
+                    cover: "https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg",
+                    stats: { "Diameter": "139,820 km", "Temp": "-110 °C", "Moons": "95", "Orbit": "12 Years" },
+                    gallery: [
+                        "https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg",
+                        "https://upload.wikimedia.org/wikipedia/commons/5/5a/Jupiter_by_Cassini-Huygens.jpg"
+                    ]
+                },
+                {
+                    id: "saturn",
+                    title: "Saturn (শনি)",
+                    type: "Gas Giant • 6th Planet (Ringed Planet)",
+                    desc: "শনি গ্রহের আকর্ষণীয় দিক হলো বরফ ও বরফাচ্ছাদিত পাথরের তৈরি চমৎকার বলয়।",
+                    cover: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg",
+                    stats: { "Diameter": "116,460 km", "Temp": "-140 °C", "Moons": "146", "Orbit": "29.5 Years" },
+                    gallery: [
+                        "https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg",
+                        "https://upload.wikimedia.org/wikipedia/commons/b/b4/Saturn_%28planet%29_large.png"
+                    ]
+                },
+                {
+                    id: "uranus",
+                    title: "Uranus (ইউরেনাস)",
+                    type: "Ice Giant • 7th Planet",
+                    desc: "একটি বরফ দানব গ্রহ। এটি তার নিজ অক্ষে প্রায় ৯০ ডিগ্রি কোণে কাত হয়ে সূর্যকে ঘোরে।",
+                    cover: "https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg",
+                    stats: { "Diameter": "50,724 km", "Temp": "-195 °C", "Moons": "28", "Orbit": "84 Years" },
+                    gallery: [
+                        "https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg"
+                    ]
+                },
+                {
+                    id: "neptune",
+                    title: "Neptune (নেপচুন)",
+                    type: "Ice Giant • 8th Planet",
+                    desc: "সৌরজগতের সবচেয়ে দূরের গ্রহ। এর বায়ুমণ্ডলে অত্যন্ত দ্রুত গতিতে বাতাস বয়ে যায়।",
+                    cover: "https://upload.wikimedia.org/wikipedia/commons/6/63/Neptune_-_Voyager_2_%2829347980845%29._jpg.jpg",
+                    stats: { "Diameter": "49,244 km", "Temp": "-200 °C", "Moons": "16", "Orbit": "165 Years" },
+                    gallery: [
+                        "https://upload.wikimedia.org/wikipedia/commons/6/63/Neptune_-_Voyager_2_%2829347980845%29._jpg.jpg"
+                    ]
+                }
+            ],
+            galaxies: [
+                {
+                    id: "milkyway",
+                    title: "Milky Way Galaxy",
+                    type: "Barred Spiral Galaxy • Our Home",
+                    desc: "আমাদের ছায়াপথ বা মিল্কিওয়ে। এতে ১০০ থেকে ৪০০ বিলিয়ন নক্ষত্র রয়েছে।",
+                    cover: "https://upload.wikimedia.org/wikipedia/commons/0/09/Milky_Way_Night_Sky_Black_Rock_Desert_Nevada.jpg",
+                    stats: { "Diameter": "100,000 LY", "Stars": "100+ Billion", "Core": "Sagittarius A*", "Type": "Spiral" },
+                    gallery: [
+                        "https://upload.wikimedia.org/wikipedia/commons/0/09/Milky_Way_Night_Sky_Black_Rock_Desert_Nevada.jpg"
+                    ]
+                },
+                {
+                    id: "andromeda",
+                    title: "Andromeda Galaxy (M31)",
+                    type: "Spiral Galaxy • Closest Neighbor",
+                    desc: "আমাদের গ্যালাক্সির সবচেয়ে কাছের প্রধান গ্যালাক্সি। এটি ২.৫ মিলিয়ন আলোকবর্ষ দূরে।",
+                    cover: "https://upload.wikimedia.org/wikipedia/commons/9/98/Andromeda_Galaxy_%28with_h-alpha%29.jpg",
+                    stats: { "Diameter": "220,000 LY", "Distance": "2.5 Million LY", "Stars": "1 Trillion", "Type": "Spiral" },
+                    gallery: [
+                        "https://upload.wikimedia.org/wikipedia/commons/9/98/Andromeda_Galaxy_%28with_h-alpha%29.jpg"
+                    ]
+                }
+            ]
         };
 
-        function showPlanet(planetKey) {
-            const data = planetsData[planetKey];
-            if(!data) return;
+        // Render Cards Grid
+        function renderGrids() {
+            const ssGrid = document.getElementById('solarsystem-grid');
+            ssGrid.innerHTML = cosmicData.solarsystem.map(item => `
+                <div class="item-card" onclick="openModal('solarsystem', '${item.id}')">
+                    <div class="img-container">
+                        <img src="${item.cover}" alt="${item.title}">
+                    </div>
+                    <h4>${item.title}</h4>
+                    <span>${item.type.split('•')[0]}</span>
+                </div>
+            `).join('');
 
-            // Update UI with smooth transition
-            document.getElementById('planet-img').src = data.img;
-            document.getElementById('planet-title').innerText = data.title;
-            document.getElementById('planet-type').innerText = data.type;
-            document.getElementById('planet-desc').innerText = data.desc;
-            document.getElementById('planet-dia').innerText = data.dia;
-            document.getElementById('planet-temp').innerText = data.temp;
-            document.getElementById('planet-moons').innerText = data.moons;
-            document.getElementById('planet-orbit').innerText = data.orbit;
-
-            // Active button highlight
-            const buttons = document.querySelectorAll('.planet-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            const galGrid = document.getElementById('galaxies-grid');
+            galGrid.innerHTML = cosmicData.galaxies.map(item => `
+                <div class="item-card" onclick="openModal('galaxies', '${item.id}')">
+                    <div class="img-container">
+                        <img src="${item.cover}" alt="${item.title}">
+                    </div>
+                    <h4>${item.title}</h4>
+                    <span>${item.type.split('•')[0]}</span>
+                </div>
+            `).join('');
         }
 
-        // Animated Background Stars
+        // Switch Page Views
+        function switchView(viewId) {
+            document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
+            document.getElementById('view-' + viewId).classList.add('active');
+
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            const navBtn = document.getElementById('nav-' + viewId);
+            if(navBtn) navBtn.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Open Detail Modal
+        function openModal(category, id) {
+            const list = cosmicData[category];
+            const item = list.find(x => x.id === id);
+            if(!item) return;
+
+            document.getElementById('modal-img').src = item.cover;
+            document.getElementById('modal-title').innerText = item.title;
+            document.getElementById('modal-type').innerText = item.type;
+            document.getElementById('modal-desc').innerText = item.desc;
+
+            // Render Stats
+            const statsContainer = document.getElementById('modal-stats');
+            statsContainer.innerHTML = Object.entries(item.stats).map(([label, val]) => `
+                <div class="stat-box">
+                    <div class="stat-label">${label}</div>
+                    <div class="stat-value">${val}</div>
+                </div>
+            `).join('');
+
+            // Render Gallery Thumbnails with Fullscreen trigger
+            const galleryContainer = document.getElementById('modal-gallery');
+            galleryContainer.innerHTML = item.gallery.map(imgUrl => `
+                <div class="gallery-item" onclick="openLightbox('${imgUrl}', '${item.title}')">
+                    <img src="${imgUrl}" alt="${item.title}">
+                </div>
+            `).join('');
+
+            document.getElementById('detail-modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('detail-modal').classList.remove('active');
+        }
+
+        // Fullscreen Lightbox System
+        function openLightbox(imgSrc, caption) {
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox-caption').innerText = caption || "Space View";
+            document.getElementById('lightbox-modal').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').classList.remove('active');
+        }
+
+        // Background Star Animation
         const canvas = document.getElementById('space-canvas');
         const ctx = canvas.getContext('2d');
         let width, height, stars = [];
@@ -604,13 +870,13 @@
             canvas.height = height;
 
             stars = [];
-            for (let i = 0; i < 180; i++) {
+            for (let i = 0; i < 150; i++) {
                 stars.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    size: Math.random() * 1.8 + 0.2,
-                    color: Math.random() > 0.4 ? '#38bdf8' : (Math.random() > 0.5 ? '#c084fc' : '#ffffff'),
-                    speed: Math.random() * 0.3 + 0.05
+                    size: Math.random() * 1.6 + 0.2,
+                    color: Math.random() > 0.4 ? '#38bdf8' : '#ffffff',
+                    speed: Math.random() * 0.2 + 0.05
                 });
             }
         }
@@ -635,6 +901,7 @@
         window.addEventListener('resize', initCanvas);
         initCanvas();
         animateStars();
+        renderGrids();
     </script>
 </body>
 </html>
