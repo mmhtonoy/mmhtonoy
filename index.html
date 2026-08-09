@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMH. TONOY | Cosmic & Sci-Fi Universe</title>
+    
+    <!-- Modern & Sleek Sci-Fi Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-deep: #02040a;
+            --neon-cyan: #38bdf8;
+            --neon-purple: #c084fc;
+            --glass-bg: rgba(8, 12, 28, 0.75);
+            --border-glow: rgba(56, 189, 248, 0.35);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Ambient Canvas */
+        #space-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Deep Cosmic Ambient Glows */
+        .ambient-nebula-1 {
+            position: fixed;
+            top: -15%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(192, 132, 252, 0.15) 0%, transparent 70%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .ambient-nebula-2 {
+            position: fixed;
+            bottom: -15%;
+            right: -10%;
+            width: 55vw;
+            height: 55vw;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Header Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(2, 4, 10, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--neon-purple);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 20px 40px 20px;
+        }
+
+        /* Facebook Cover Ratio Box (Approx 16:9 / 820x360 Ratio) */
+        .hero-fb-cover-box {
+            position: relative;
+            width: 100%;
+            max-width: 850px;
+            min-height: 380px;
+            padding: 40px 45px;
+            border-radius: 20px;
+            /* Real High-Quality Galaxy Background Image */
+            background: 
+                linear-gradient(180deg, rgba(2, 4, 10, 0.45) 0%, rgba(2, 4, 10, 0.85) 100%),
+                url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200') center/cover no-repeat;
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(56, 189, 248, 0.25);
+            backdrop-filter: blur(8px);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .hero-fb-cover-box:hover {
+            transform: translateY(-4px);
+            border-color: var(--neon-cyan);
+        }
+
+        .hero-tag {
+            font-family: 'Exo 2', sans-serif;
+            color: var(--neon-cyan);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #38bdf8 50%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-bio {
+            font-size: 1.05rem;
+            color: #cbd5e1;
+            margin-bottom: 25px;
+            max-width: 720px;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .hero-highlights {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .highlight-chip {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--neon-purple);
+            font-weight: 600;
+        }
+
+        .sci-btn {
+            display: inline-block;
+            padding: 12px 32px;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0284c7 0%, #9333ea 100%);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(147, 51, 234, 0.35);
+        }
+
+        .sci-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Container Section */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 35px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title span {
+            color: var(--neon-cyan);
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--neon-purple), transparent);
+        }
+
+        /* Cards Grid */
+        .cosmos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .cosmos-card {
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .cosmos-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.15);
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .cosmos-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .cosmos-card p {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 30px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            background: #020308;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero-fb-cover-box { padding: 30px 20px; min-height: auto; }
+            .hero-bio { font-size: 0.95rem; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-nebula-1"></div>
+    <div class="ambient-nebula-2"></div>
+    <canvas id="space-canvas"></canvas>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo">MMH.<span>TONOY</span></div>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#cosmos">Cosmology</a></li>
+                <li><a href="#research">Research</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Facebook Cover Style Hero Box -->
+    <section class="hero">
+        <div class="hero-fb-cover-box">
+            <div class="hero-tag">WELCOME TO MY COSMIC REALM</div>
+            <h1>MMH. TONOY</h1>
+            
+            <p class="hero-bio">
+                I am <strong>MMH. TONOY</strong> — a passionate explorer of the deep universe, solar system dynamics, and science fiction realms. Fascinated by black holes, wormholes, and futuristic space concepts, I blend cosmic aesthetics with modern web architecture to bring galactic visions to life.
+            </p>
+
+            <div class="hero-highlights">
+                <span class="highlight-chip">🪐 Solar System Explorer</span>
+                <span class="highlight-chip">🚀 Sci-Fi Enthusiast</span>
+                <span class="highlight-chip">🌌 Deep Space & Galaxy</span>
+                <span
+                n</span>
+            </div>
+
+            <a href="#cosmos" class="sci-btn">Explore The Cosmos</a>
+        </div>
+    </section>
+
+    <!-- Cosmos Interests -->
+    <section class="container" id="cosmos">
+        <h2 class="section-title">Core <span>Cosmic Fields</span></h2>
+        <div class="cosmos-grid">
+            <div class="cosmos-card">
+                <div class="card-icon">🪐</div>
+                <h3>Solar System Mechanics</h3>
+                <p>Studying the orbital dynamics, planetary environments, and asteroid belts revolving around our central star, the Sun.</p>
+            </div>
+            <div class="cosmos-card">
+                <div class="card-icon">🌌</div>
+                <h3>Deep Space & Galaxies</h3>
+                <p>Exploring the mysteries of the Milky Way, distant nebulae, cosmic microwave background, and enigmatic black holes.</p>
+            </div>
+            <div class="cosmos-card">
+                <div class="card-icon">🚀</div>
+                <h3>Sci-Fi & Web Architecture</h3>
+                <p>Conceptualizing futuristic ideas like time travel, wormholes, and multiverse theories into sleek modern web interfaces.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>MMH. TONOY &copy; 2026 | Transmitting from Milky Way Galaxy</p>
+    </footer>
+
+    <!-- Star Animation JS -->
+    <script>
+        const canvas = document.getElementById('space-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let stars = [];
+
+        function initCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+
+            stars = [];
+            for (let i = 0; i < 180; i++) {
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: Math.random() * 1.8 + 0.2,
+                    color: Math.random() > 0.4 ? '#38bdf8' : (Math.random() > 0.5 ? '#c084fc' : '#ffffff'),
+                    speed: Math.random() * 0.3 + 0.05
+                });
+            }
+        }
+
+        function animateStars() {
+            ctx.clearRect(0, 0, width, height);
+
+            stars.forEach(star => {
+                ctx.fillStyle = star.color;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.fill();
+
+                star.y += star.speed;
+                if (star.y > height) {
+                    star.y = 0;
+                    star.x = Math.random() * width;
+                }
+            });
+
+            requestAnimationFrame(animateStars);
+        }
+
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+        animateStars();
+    </script>
+</body>
+</html>
